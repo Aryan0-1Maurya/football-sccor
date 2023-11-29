@@ -4,7 +4,7 @@ Experience the excitement of scoring goals in the thrilling Football Score proje
 
 ## Play the Game
 
-[Start Scoring](https://aryan0-1maurya.github.io/football-score/) 🕹️
+[Start Scoring](https://aryan0-1maurya.github.io/football-sccor/) 🕹️
 
 ## About the Project
 
