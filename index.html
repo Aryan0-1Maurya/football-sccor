@@ -1,0 +1,210 @@
+<!-- 
+
+      ************************************************************
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+{   By ~Aryan Maurya Mr.perfect https://amsrportfolio.netlify.app  }
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+      ************************************************************
+ -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <meta name="author" content="Aryan Maurya" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="favicon.png" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <meta
+          name="description"
+          content="This is online Football soccer game build for your imporove thing skill in this domain by aryan maurya enjoy your game"
+        />
+        <meta name="keywords" content="Football score game, soccer simulation, goal challenge, sports gaming, penalty shootout, virtual football, match excitement, goal celebration, sports simulation, team strategy, sportsmanship, championship, multiplayer football, goalkeeping, soccer league, online sports game, football tactics, winning goals, goal kick, football manager, sports entertainment">
+
+        <title>Football Soccer</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="main.js"></script>
+    </head>
+    <body>
+       
+        <div id="highScore"><span>High Score</span><br><span id="hs" style="font-size:20px; font-weight:700;" >0</span></div>
+        <div id="scoreBoard"><span id="cb">Current Best</span><br><span id="score">0</span></div>
+        <canvas id="myCanvas"></canvas>
+        <script type="text/javascript">
+            var h=window.innerHeight-5;
+            var w=window.innerWidth;
+            if(w>720){
+                w=360;
+            }
+            var ballRadius=57;
+            var x=w/2;
+            var y=h-ballRadius;
+            var dx=0;
+            var dy=0;
+            var uy=0;
+            var u=15;
+            var a=0;
+            var t=2;
+            var angle;
+            var score=0;
+            var bestScore=0;
+            var scoreBoard=document.getElementById("scoreBoard");
+            var scorePoint=document.getElementById("score");
+            var currentBest=document.getElementById("cb");
+            var c=document.getElementById("myCanvas");
+                c.height=h;
+                c.width=w;
+                 if((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)){
+                c.addEventListener("touchstart",touchPoint)
+          }
+          else{
+                     c.addEventListener("mousedown",clickPoint)
+                  }
+            var ctx=c.getContext("2d");
+            
+            function scoreUpdate(){
+                scorePoint.style.color="#7e7e7e";
+                score++;
+                scorePoint.innerHTML=score;
+                currentBest.style.display="none";
+            }
+            
+            function highScore(){
+           
+                    document.getElementById("hs").innerHTML=score;
+                }
+            
+            highScore();
+            
+            function finalScore(){
+                if(score>bestScore){
+                    bestScore=score;
+       highScore();
+                }
+                
+                score=0;
+                currentBest.style.display="inline";
+                scorePoint.style.color="#0084ff";
+                scorePoint.innerHTML=bestScore;
+            }
+            
+            function touchPoint(e){
+                var touchObject=e.changedTouches[0];
+                var touchX=parseInt(touchObject.clientX);
+                var touchY=parseInt(touchObject.clientY);
+                if(touchX>=(x-ballRadius) && touchX<=(x+ballRadius) && touchY>=(y-ballRadius) && touchY<=(y+ballRadius)){
+                    t=2;
+                    a=.5;
+                    angle=(Math.PI-Math.acos((touchX-x)/ballRadius))//*180/Math.PI;
+                    uy=u*Math.sin(angle)+2;
+                    dx=u*Math.cos(angle)/1.2;
+                    scoreUpdate();
+                }
+            }
+            
+            
+            function clickPoint(e){
+                var touchX=parseInt(e.clientX);
+                var touchY=parseInt(e.clientY);
+                if(touchX>(x-ballRadius) && touchX<(x+ballRadius) && touchY>(y-ballRadius) && touchY<(y+ballRadius)){
+                    t=2;
+                    a=.5;
+                    angle=(Math.PI-Math.acos((touchX-x)/ballRadius))//*180/Math.PI;
+                    uy=u*Math.sin(angle)+2;
+                    dx=u*Math.cos(angle)/1.2;
+                    scoreUpdate();
+                }
+            }
+            
+            function velocity(){
+                dy=uy-a*t;
+                t++;
+            }
+            
+            function gameOver(){
+                if((y+ballRadius)>h+1500){
+                    a=0;
+                    uy=0;
+                    t=2;
+                    y=h-ballRadius;
+                    x=w/2;
+                    dx=0;
+                    
+                    finalScore();
+                }
+            }
+            
+            function drawBall(){
+                x+=dx;
+                y-=dy;
+                ctx.drawImage(img,x-ballRadius,y-ballRadius,ballRadius*2,ballRadius*2);
+                ctx.globalCompositeOperation="destination-in";
+                ctx.beginPath();
+                ctx.arc(x,y,ballRadius,0,Math.PI*2);
+                ctx.fillStyle="#243344";
+                ctx.fill();
+                ctx.globalCompositeOperation='source-over';
+                ctx.closePath();
+                if((x-ballRadius)<=0 || (x+ballRadius)>=w){
+                    dx=-dx;
+                }
+            }
+            
+            window.onload=function(){
+                var intv=setInterval(function(){
+                    velocity();
+                    drawBall();
+                    gameOver();
+                },10)        
+            }    
+        </script>
+        <script>
+             Swal.fire({
+        icon: "success",
+        title: "Touch/Click the bottom of the ball to prevent falling...\nFor better experience, play with a touch device",
+       
+        timer: 3800,
+        showClass: {
+          popup: `
+     animate__animated
+     animate__fadeInUp
+     animate__faster
+   `,
+        },
+        hideClass: {
+          popup: `
+     animate__animated
+     animate__fadeOutDown
+     animate__faster
+   `,
+        },
+      });
+        </script>
+    </body>
+</html>
+
+<!-- 
+
+      ************************************************************
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+{   By ~Aryan Maurya Mr.perfect https://amsrportfolio.netlify.app  }
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+      ************************************************************
+ -->

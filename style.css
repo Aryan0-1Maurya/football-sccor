@@ -1,0 +1,78 @@
+/* 
+
+     ============================================================
+      
+          _____________   ^^^^^^^^^^    ____________________
+
+[   By ~Aryan Maurya Mr.perfect https://amsrportfolio.netlify.app  ]
+
+          _____________   ^^^^^^^^^^    ____________________
+
+     ============================================================
+
+*/
+
+#buymeacoffee {
+    z-index: 10000;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: block;
+    text-align: center;
+}
+
+#buymeacoffee img {
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+            
+            body {
+                margin:0;
+                background:#fff;
+            }
+            
+            #scoreBoard {
+                position:absolute;
+                top:70px;
+                left:0;
+                z-index:-1;
+                width:100%;
+                height:120px;
+                text-align:center;
+                font-size:20px;
+                color:#7e7e7e;
+            }
+            
+            #score {
+                font-size:95px;
+                display:inline-block;
+                font-weight:300;
+                color:#0084ff;
+            }
+            
+            #highScore {
+                position:absolute;
+                top:5px;
+                right:5px;
+                width:80px;
+                text-align:center;
+                color:#222;
+                font-size:15px;
+                z-index:-1;
+            }
+
+
+            /* 
+
+     ============================================================
+      
+          _____________   ^^^^^^^^^^    ____________________
+
+[   By ~Aryan Maurya Mr.perfect https://amsrportfolio.netlify.app  ]
+
+          _____________   ^^^^^^^^^^    ____________________
+
+     ============================================================
+
+*/
